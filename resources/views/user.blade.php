@@ -4,25 +4,19 @@
     <title>Data User</title>
 </head>
 <body>
-    <h1>Data User</h1>
-    <table border="1" cellpadding="2" cellspacing="0">
+    <h1 style="text-align: center;">Data User</h1>
+
+    <!-- Tabel untuk menampilkan jumlah pengguna -->
+    <table border="1" cellpadding="5" cellspacing="0" align="center">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Nama</th>
-                <th>ID Level Pengguna</th>
+                <th>Jumlah Pengguna</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $d)
-                <tr>
-                    <td>{{ $data->user_id }}</td>
-                    <td>{{ $data->username }}</td>
-                    <td>{{ $data->nama }}</td>
-                    <td>{{ $data->level_id }}</td>
-                </tr>
-            @endforeach
+            <tr>
+                <td style="text-align: center;">{{ $userCount }}</td>
+            </tr>
         </tbody>
     </table>
 </body>
