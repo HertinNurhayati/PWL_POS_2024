@@ -40,7 +40,7 @@
                 <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu ==
                 'supplier')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-city"></i>
-                    <p>Supllier</p>
+                    <p>Supplier</p>
                 </a>
             </li>
 
@@ -62,14 +62,14 @@
             
             <li class="nav-header">Data Transaksi</li>
             <li class="nav-item">
-                <a href="{{ url('/stok') }}" class="nav-link {{ ($activeMenu == 'stok')? 
+                <a href="{{ url('/stok') }}" class="nav-link {{ ($activeMenu == 'stok')?
                 'active' : '' }} ">
                 <i class="nav-icon fas fa-cubes"></i>
                 <p>Stok Barang</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu == 
+                <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu ==
         'penjualan')? 'active' : '' }} ">
                 <i class="nav-icon fas fa-cash-register"></i>
                 <p>Transaksi Penjualan</p>
