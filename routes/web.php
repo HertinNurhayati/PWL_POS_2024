@@ -231,6 +231,7 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('/{id}', [SupplierController::class, 'destroy']); //mengahapus data user
     });
 
+    Route::middleware(['authorize:ADM,MNG'])->group(function(){
     Route::group(['prefix' => 'barang'], function(){
         Route::get('/', [BarangController::class, 'index']);          //menampilkan halaman awal user
         Route::post('/list', [BarangController::class, 'list']);      //menampilkan data user dalam bentuk json untuk datatables
@@ -247,6 +248,5 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); //untuk hapus data user ajax
         Route::delete('/{id}', [BarangController::class, 'destroy']); //mengahapus data user
     });
-
-
+});
 });
