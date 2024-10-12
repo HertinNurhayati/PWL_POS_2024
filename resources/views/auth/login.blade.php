@@ -53,13 +53,21 @@ placeholder="Password">
 <div class="col-8">
 <div class="icheck-primary">
 <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
+
 </div>
 </div>
 <!-- /.col -->
-<div class="col-4">
-<button type="submit" class="btn btn-primary btn-block">Sign In</button>
+<div class="button-container">
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+    </div>
+    <div class="col-12 mt-2">
+    <p>Don't have an account?</p>
+        <a href="{{ url('/register') }}" class="btn btn-secondary btn-block">Register</a>
+    </div>
 </div>
 <!-- /.col -->
+
 </div>
 </form>
 </div>
