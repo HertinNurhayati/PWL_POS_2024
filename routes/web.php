@@ -12,7 +12,6 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\StokController;
 
 
-use Monolog\Level;
 
 // //JOBSHEET 2 : MEMBUAT ROUTE
 
@@ -36,7 +35,7 @@ use Monolog\Level;
 // //================================================================================
 
 //Jobsheet 3 : Implementasi DB FACADE
-Route::get('/level', [LevelController::class, 'index']);
+
 
 //Query Builder
 use App\Http\Controllers\KategoriController;
@@ -44,18 +43,9 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WelcomeController;
 use Monolog\Handler\RotatingFileHandler;
 
-Route::get('/kategori', [KategoriController::class, 'index']);
 
 
 //Eloquent ORM
-Route::get('/user', [UserController::class, 'index']);
-
-//Jobsheet 4 : ORM CRUD
-Route::get('/user/tambah', [UserController::class, 'tambah']);
-Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
-Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
-Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
-Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
 //Jobsheet 5
 // Route::get('/', [WelcomeController::class, 'index']);
@@ -187,18 +177,20 @@ Route::middleware(['auth'])->group(function(){
             Route::post('/list', [LevelController::class, 'list']);      //menampilkan data Level dalam bentuk json untuk datatables
             Route::get('/create', [LevelController::class, 'create']);   //menammpilkan halaman form tambah Level
             Route::post('/', [LevelController::class, 'store']);         //menyimpan data Level baru
-        
             Route::get('/create_ajax', [LevelController::class, 'create_ajax']);  //menampilkan halaman form tambah Level Ajax
             Route::post('/ajax', [LevelController::class, 'store_ajax']);         //menyimpan data Level baru Ajax
             Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']);  //menampilkan halaman form edit Level Ajax
             Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']);  //Menyimpan halaman form edit Level Ajax
             Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']);  //tampilan form confirm delete Level Ajax
             Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); //menghapus data Level Ajax
-            
             Route::get('/{id}', [LevelController::class, 'show']);       //menampilkan detail Level
             Route::get('/{id}/edit', [LevelController::class, 'edit']);  //menampilkan halaman form detail Level
             Route::put('/{id}', [LevelController::class, 'update']);     //menyimpan perubahan data Level
             Route::delete('/{id}', [LevelController::class, 'destroy']); //menghapus data level
+            Route::get('/level/import', [LevelController::class, 'import']);
+            Route::post('/level/import_ajax', [LevelController::class, 'import_ajax']);
+            Route::get('/level/export_excel', [LevelController::class, 'export_excel']); // export excel
+            Route::get('/level/export_pdf', [LevelController::class, 'export_pdf']); // export pdf
             
         });
     });
