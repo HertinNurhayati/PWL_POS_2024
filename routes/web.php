@@ -248,9 +248,11 @@ Route::middleware(['auth'])->group(function(){
         Route::put('/{id}', [BarangController::class, 'update']);     //menyimpan perubahan data user
         Route::get('/{id}/edit_ajax', [BarangController::class, 'edit_ajax']); //Menampilkan halaman form edit user Ajax
         Route::put('/{id}/update_ajax', [BarangController::class, 'update_ajax']);  //Menyimpan perubahan data user
-        Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']);  //tampilan form confirm ddelete user Ajax
-        Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); //untuk hapus data user ajax
-        Route::delete('/{id}', [BarangController::class, 'destroy']); //mengahapus data user
+        Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // menampilkan form confirm delete supplier ajax
+        Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // menghapus data supplier ajax
+        Route::delete('/{id}', [BarangController::class, 'destroy']);// Menghapus data Barang
+        Route::get('/import', [BarangController::class, 'import']);  //ajax form upload excel
+        Route::post('/import_ajax', [BarangController::class, 'import_ajax']);  //ajax import excel
     });
 
     Route::group(['prefix'=> 'stok','middleware'=> 'authorize:ADM,MNG,STF'], function(){
