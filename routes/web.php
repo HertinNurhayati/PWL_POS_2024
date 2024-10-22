@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -210,7 +211,9 @@ Route::group(['prefix' => 'penjualan', 'middleware' => 'authorize:ADM,MNG,STF'],
     Route::put('/{id}', [PenjualanController::class, 'update']);     //menyimpan perubahan data Penjualan
     Route::delete('/{id}', [PenjualanController::class, 'destroy']); //menghapus data Penjualan
 
-
-
 });
+
+    Route::get('/profil', [ProfilController::class, 'index']);
+    Route::post('/profil/update', [ProfilController::class, 'update']);
+
 });
