@@ -1,19 +1,19 @@
-<html>
-
+!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: "Times New Roman", Times, serif;
-            margin: 6px 20px 5px 20px;
+            margin: 6px 20px;
             line-height: 15px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        td,
-        th {
+        td, th {
             padding: 4px 3px;
         }
         th {
@@ -35,7 +35,7 @@
             text-align: center;
         }
         .p-1 {
-            padding: 5px 1px 5px 1px;
+            padding: 5px 1px;
         }
         .font-10 {
             font-size: 10pt;
@@ -52,68 +52,51 @@
         .border-bottom-header {
             border-bottom: 1px solid;
         }
-        .border-all,
-        .border-all th,
-        .border-all td {
+        .border-all, .border-all th, .border-all td {
             border: 1px solid;
         }
     </style>
 </head>
-
 <body>
     <table class="border-bottom-header">
         <tr>
-            <td width="15%" class="text-center"><img src="{{ asset('polinema-bw.jpg')
-}}"></td>
+            <td width="15%" class="text-center"><img src="{{ asset('polinema-bw.jpg') }}"></td>
+            </td>
             <td width="85%">
-                <span class="text-center d-block font-11 font-bold mb-1">KEMENTERIAN
-                    PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI</span>
-                <span class="text-center d-block font-13 font-bold mb-1">POLITEKNIK NEGERI
-                    MALANG</span>
-                <span class="text-center d-block font-10">Jl. Soekarno-Hatta No. 9 Malang
-                    65141</span>
-                <span class="text-center d-block font-10">Telepon (0341) 404424 Pes. 101-
-                    105, 0341-404420, Fax. (0341) 404420</span>
+                <span class="text-center d-block font-11 font-bold mb-1">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI</span>
+                <span class="text-center d-block font-13 font-bold mb-1">POLITEKNIK NEGERI MALANG</span>
+                <span class="text-center d-block font-10">Jl. Soekarno-Hatta No. 9 Malang 65141</span>
+                <span class="text-center d-block font-10">Telepon (0341) 404424 Pes. 101-105, 0341-404420, Fax. (0341) 404420</span>
                 <span class="text-center d-block font-10">Laman: www.polinema.ac.id</span>
             </td>
         </tr>
     </table>
-    <h3 class="text-center">LAPORAN DATA BARANG</h4>
-        <table class="border-all">
-            <thead>
-                <tr>
-                    <th class="text-center">No</th>
-                    <th>Kode Barang</th>
-                    <th>Nama Barang</th>
-                    <th class="text-right">Harga Beli</th>
-                    <th class="text-right">Harga Jual</th>
-                    <th>Kategori</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($barang as $b)
-                <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
-                    <td>{{ $b->barang_kode }}</td>
-                    <td>{{ $b->barang_nama }}</td>
-                    <td class="text-right">{{ number_format($b->harga_beli, 0, ',', '.') }}</td>
-                    <td class="text-right">{{ number_format($b->harga_jual, 0, ',', '.') }}</td>
-                    <td>{{ $b->kategori->kategori_nama }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-</body>
 
+    <h3 class="text-center">LAPORAN DATA BARANG</h3>
+
+    <table class="border-all">
+        <thead>
+            <tr>
+                <th class="text-center">No</th>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th class="text-right">Harga Beli</th>
+                <th class="text-right">Harga Jual</th>
+                <th>Kategori</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($barang as $b)
+            <tr>
+                <td class="text-center">{{ $loop->iteration }}</td>
+                <td>{{ $b->barang_kode }}</td>
+                <td>{{ $b->barang_nama }}</td>
+                <td class="text-right">{{ number_format($b->harga_beli, 0, ',', '.') }}</td>
+                <td class="text-right">{{ number_format($b->harga_jual, 0, ',', '.') }}</td>
+                <td>{{ $b->kategori->kategori_nama }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</body>
 </html>
-  1 change: 1 addition & 0 deletions1  
-resources/views/barang/index.blade.php
-Original file line number	Diff line number	Diff line change
-@@ -6,6 +6,7 @@
-        <div class="card-tools">
-            <button onclick="modalAction('{{ url('barang/import') }}')" class="btn btn-info">Import Barang</button>
-            <a href="{{ url('/barang/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i>Export Barang</a>
-            <a href="{{ url('/barang/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i>Export Barang</a>
-            <button onclick="modalAction('{{ url('/barang/create_ajax')}}')" class="btn btn-success">Tambah Data (Ajax)</button>
-        </div>
-    </div>

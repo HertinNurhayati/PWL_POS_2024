@@ -9,7 +9,7 @@
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <img src="{{ auth()->user()->avatar ? asset('storage/avatars/' . auth()->user()->avatar) : asset('default-avatar.png') }}"
-                             class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;" alt="Avatar">
+                            class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;" alt="Avatar">
                     </div>
 
                     <h3 class="profile-username text-center">{{ auth()->user()->nama }}</h3>

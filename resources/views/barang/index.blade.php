@@ -3,11 +3,10 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Daftar barang</h3>
+        <h3 class="card-title">Daftar Barang</h3>
         <div class="card-tools">
             <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-info">Import Barang</button>
-            <a href="{{ url('/barang/export_excel') }}" class="btn btn-primary"><i class="fa fa-file
-            excel"></i> Export Barang</a>
+            <a href="{{ url('/barang/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i>Export Barang</a>
             <a href="{{ url('/barang/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i>Export Barang</a>
             <button onclick="modalAction('{{ url('/barang/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
         </div>
@@ -33,6 +32,7 @@
                 </div>
             </div>
         </div>
+
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -56,17 +56,24 @@
         </table>
     </div>
 </div>
+
 <div id="myModal" class="modal fade animate shake" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="75%"></div>
 @endsection
 
 @push('js')
 <script>
-function modalAction(url = ''){
+function modalAction(url = '') {
     $('#myModal').load(url, function(){
         $('#myModal').modal('show');
+        
+        // Saat modal ditutup, reload data secara otomatis
+        $('#myModal').on('hidden.bs.modal', function () {
+            tableBarang.ajax.reload();  // Reload tabel setelah modal ditutup
+        });
     });
 }
 
+// Inisialisasi DataTable
 var tableBarang;
 $(document).ready(function(){
     tableBarang = $('#table-barang').DataTable({
@@ -82,7 +89,8 @@ $(document).ready(function(){
         },
         columns: [
             {
-                data: "DT_RowIndex", // Change this if 'No_Urut' does not exist                className: "text-center",
+                data: "DT_RowIndex", // Change this if 'No_Urut' does not exist
+                className: "text-center",
                 orderable: false,
                 searchable: false
             },
@@ -126,8 +134,47 @@ $(document).ready(function(){
         ]
     });
 
+    // Filter kategori untuk reload data sesuai pilihan filter
     $('.filter_kategori').change(function() {
         tableBarang.draw();
+    });
+});
+
+// AJAX form submit untuk operasi tambah/edit
+$('#form-barang').submit(function(e) {
+    e.preventDefault();
+    let form = $(this);
+    let actionUrl = form.attr('action');
+
+    $.ajax({
+        url: actionUrl,
+        type: 'POST',
+        data: form.serialize(),
+        success: function(response) {
+            if (response.status == 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: response.message,
+                }).then(function() {
+                    $('#myModal').modal('hide'); // Tutup modal
+                    tableBarang.ajax.reload(); // Reload data di tabel
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Terjadi Kesalahan',
+                    text: response.message,
+                });
+            }
+        },
+        error: function(xhr) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Terjadi kesalahan saat memproses data.',
+            });
+        }
     });
 });
 </script>
