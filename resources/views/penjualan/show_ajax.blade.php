@@ -5,6 +5,24 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
+            <table class="table table-bordered table-striped table-sm mb-3">
+                <tr>
+                    <th>Nama Pembeli</th>
+                    <td>{{ $penjualan->pembeli }}</td>
+                </tr>
+                <tr>
+                    <th>Kode Penjualan</th>
+                    <td>{{ $penjualan->penjualan_kode }}</td>
+                </tr>
+                <tr>
+                    <th>Tanggal Penjualan</th>
+                    <td>{{ $penjualan->penjualan_tanggal }}</td>
+                </tr>
+                <tr>
+                    <th>Nama User</th>
+                    <td>{{ $users->nama }}</td>
+                </tr>
+            </table>
             <table class="table table-bordered table-striped table-hover table-sm">
                 <thead>
                     <tr>
@@ -36,6 +54,7 @@ $(document).ready(function() {
     // Ketika modal dibuka
     $('#modal-master').on('show.bs.modal', function(event) {
         let penjualanId = $(event.relatedTarget).data('id'); // ID penjualan yang dikirim dari tombol pemicu modal
+
         // Panggil AJAX untuk mengambil data
         $.ajax({
             url: '/penjualan/' + penjualanId + '/show_ajax', // Mengambil data detail penjualan
@@ -54,4 +73,5 @@ $(document).ready(function() {
         });
     });
 });
+
 </script>
